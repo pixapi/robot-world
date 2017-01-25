@@ -13,7 +13,7 @@ class Robot
   end
 
   def save
-    @database.execute("INSERT INTO tasks (name, city, state, department) VALUES (?, ?);", @name, @city, @state, @department)
+    @database.execute("INSERT INTO robots (name, city, state, department) VALUES (?, ?, ?, ?);", @name, @city, @state, @department)
   end
 
   def self.database
@@ -28,5 +28,31 @@ class Robot
     robots.map do |robot|
       Robot.new(robot)
     end
+  end
+
+  def self.find(id)
+    database
+    robot = database.execute("SELECT * FROM tasks WHERE id = ?", id).first
+    Robot.new(robot)
+  end
+
+  def self.update(id, robot_params)
+    database.execute("UPDATE robots
+                      SET name = ?,
+                          city = ?,
+                          state = ?,
+                          department = ?
+                      WHERE id = ?;",
+                      robot_params[:name],
+                      robot_params[:city],
+                      robot_params[:state],
+                      robot_params[:department],
+                      id)
+    Robot.find(id)
+  end
+
+  def self.delete(id)
+    database.execute("DELETE FROM tasks
+                      WHERE id = ?;", id)
   end
 end
