@@ -1,15 +1,24 @@
-<h1>My Robots</h1>
+<h1>My Robot Buddies</h1>
 
 <% @robots.each do |robot| %>
-<h3><a href="/robots/<%= robot.id %>"><% robot.name %></a></h3>
-  <!-- <p><%= robot.name %></p> -->
-  <p><%= robot.city %></p>
-  <p><%= robot.state %></p>
-  <p><%= robot.department %></p>
-
-  <a href="/robots/<%= robot.id %>/edit">Edit</a>
-  <form action="/robots/<%= robot.id %>" method="POST">
-    <input type="hidden" name="_method" value="DELETE"  />
-    <input type="submit" value="delete"  />
-  </form>
+<!-- <h3><a href="/robots/<%= robot.id %>"><%= robot.name %></a></h3> -->
+<img src="https://robohash.org/<%= robot.name %>.png">
+<!-- <img ... /> -->
+<div class="display">
+  <p>Name: <a href="/robots/<%= robot.id %>"><%= robot.name %></a></p>
+  <p>City: <%= robot.city %></p>
+  <p>State: <%= robot.state %></p>
+  <p>Department: <%= robot.department %></p>
+</div>
+<div class="edit">
+  <div id="btn-edit" >
+    <a href="/robots/<%= robot.id %>/edit">Edit</a>
+  </div>
+  <div>
+    <form action="/robots/<%= robot.id %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE"  />
+      <input id="btn-delete" type="submit" value="delete"  />
+    </form>
+  </div>
+</div>
 <% end %>

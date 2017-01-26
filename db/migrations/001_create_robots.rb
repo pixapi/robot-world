@@ -8,4 +8,4 @@ database.execute("CREATE TABLE robots (id INTEGER PRIMARY KEY AUTOINCREMENT,
                                       department VARCHAR(64)
                                       );"
                 )
-puts "creating robots table for development"
+# puts "creating robots table for development"

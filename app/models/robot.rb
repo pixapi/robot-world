@@ -1,15 +1,15 @@
 require 'sqlite3'
 
 class Robot
-  attr_reader :name, :city, :state, :department
+  attr_reader :id, :name, :city, :state, :department
   def initialize(robot_params)
+    @id         = robot_params["id"] if robot_params["id"]
     @name       = robot_params["name"]
     @city       = robot_params["city"]
     @state      = robot_params["state"]
     @department = robot_params["department"]
     @database = SQLite3::Database.new('db/robot_world_development.db')
     @database.results_as_hash = true
-    @id = robot_params["id"] if robot_params["id"]
   end
 
   def save
@@ -23,7 +23,7 @@ class Robot
   end
 
   def self.all
-    database
+    # Robot.database #(not sure if necessary Robot.database or only database)
     robots = database.execute("SELECT * FROM robots")
     robots.map do |robot|
       Robot.new(robot)
@@ -31,8 +31,8 @@ class Robot
   end
 
   def self.find(id)
-    database
-    robot = database.execute("SELECT * FROM tasks WHERE id = ?", id).first
+    # Robot.database #(not sure if necessary Robot.database or only database)
+    robot = database.execute("SELECT * FROM robots WHERE id = ?", id).first
     Robot.new(robot)
   end
 
@@ -51,8 +51,8 @@ class Robot
     Robot.find(id)
   end
 
-  def self.delete(id)
-    database.execute("DELETE FROM tasks
+  def self.destroy(id)
+    database.execute("DELETE FROM robots
                       WHERE id = ?;", id)
   end
 end

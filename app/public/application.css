@@ -1,1 +1,35 @@
+p {
+  font-family: 'Overpass Mono', monospace;
+  /*background: blue;
+  color: red;*/
+}
 
+h1, h3 {
+  font-family: 'Overpass Mono', monospace;
+  color: green;
+}
+/*
+label {
+  color: red;
+}*/
+
+.display {
+  background: olive;
+}
+
+.edit #btn-edit {
+  text-decoration: none;
+  background: yellow;
+  height: 20px;
+  width: 60px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.edit #btn-delete {
+  background: red;
+  height: 20px;
+  width: 60px;
+  padding: 5px;
+  margin: 10px;
+}
